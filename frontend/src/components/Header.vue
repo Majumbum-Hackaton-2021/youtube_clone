@@ -19,7 +19,7 @@
       <i class="material-icons">videocam</i>
       <i class="material-icons">apps</i>
       <i class="material-icons">notifications</i>
-      <i class="material-icons display-this">account_circle</i>
+      <router-link to="/authentication"><i class="material-icons display-this">account_circle</i></router-link>
     </div>
   </div>
 </template>

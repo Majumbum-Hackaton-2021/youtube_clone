@@ -11,7 +11,7 @@
         <h3>
           {{title}}
         </h3>
-        <a :href="link">{{channel}}</a>
+        <a :href="'watch?id='+id">{{channel}}</a>
         <span>{{views}} Views • {{edit }}</span>
       </div>
     </div>
@@ -23,7 +23,7 @@ export default {
   name: "VideoBox",
   props: {
     image: String,
-    link: String,
+    id: String,
     title: String,
     channel: String,
     edit: String,
