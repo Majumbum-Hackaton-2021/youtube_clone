@@ -1,0 +1,63 @@
+= Hackaton 2021
+
+== #lescodeursnelagerpas *Youtube_Clone*
+
+As part of the Hackaton organized in 2021 by
+https://t.me/lescodeursnelagerpas[#lescodeursnelagerpas]
+we chose to clone some features of youtube. In the document below we will
+list the different features that will be implemented in the application.
+
+The clone To develop the application we will use VueJS for the frontend and Spring Boot
+for the backend. The application will have the following features:
+
+USER (Not logged in)
+
+. See Videos
+. Register
+. Login
+
+USER (logged in)
+
+. See videos
+. Comments videos
+. likes videos
+. saved videos liked (optional)
+
+Moderator
+
+. Add videos
+. Delete videos
+. Edit videos
+. Delete Users comments (optional)
+
+Admin
+
+. Ban users
+. update roles
+
+=== INSTALLATION
+
+To install and run this project follow these steps:
+
+. Clone this repository
+
+. Install Gradle Dependency in hackaton/backend
+
+. Go to (hackaton/frontend) and  run "npm install" command to download frontend dependencies
+
+=== RUN THE PROJECT
+
+. Go to (hackaton/frontend) and  run "npm run serve". The app will start on port 8080
+. Go to (hackaton/backend/src/main/java/com/majumbum/youtube_clone/) und start the Spring Boot Rest Api
+with "YoutubeCloneApplication.java" as main class (The api will start on port 8090)
+
+
+=== Used Technologie
+
+. Vue with Vuex(Store an state Management)
+
+. Axios for the http Request
+
+. Java Spring Boot for the Backend
+
+. H2 Virtual Database with JPA
