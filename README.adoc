@@ -21,6 +21,7 @@ USER (logged in)
 . See videos
 . Comments videos
 . likes videos
+. change name, password and profile data
 . saved videos liked (optional)
 
 Moderator
