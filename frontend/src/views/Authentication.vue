@@ -1,7 +1,7 @@
 <template>
 <Header/>
   <div>
-    <h1>Authentication</h1>
+    <h1>Klaus</h1>
   </div>
 </template>
 
