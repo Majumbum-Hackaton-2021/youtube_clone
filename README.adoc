@@ -61,4 +61,4 @@ with "YoutubeCloneApplication.java" as main class (The api will start on port 80
 
 . Java Spring Boot for the Backend
 
-. H2 Virtual Database with JPA *
+. H2 Virtual Database with JPA 
