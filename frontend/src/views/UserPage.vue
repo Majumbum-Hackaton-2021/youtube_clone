@@ -8,8 +8,8 @@
             <div class="d-flex flex-column align-items-center text-center">
               <img :src="userInfos.image" alt="Admin" class="rounded-circle" width="150">
               <div class="mt-3">
-                <h4>{{firstname}} {{lastname}}</h4>
-                <p class="text-secondary mb-1">Allias : {{nickname}}</p>
+                <h4>{{userInfos.firstname}} {{userInfos.lastname}}</h4>
+                <p class="text-secondary mb-1">Allias : {{userInfos.nickname}}</p>
                 <p class="text-secondary mb-1">Gender : {{userInfos.gender}}</p>
                 <p class="text-muted font-size-sm">
                   <span :key="index2" v-for="(auth, index2) in userInfos.grantedAuthorities">
@@ -32,7 +32,7 @@
                   <h6 class="mb-0">Firstname</h6>
                 </div>
                 <div class="col-sm-9 text-secondary">
-                  <input type="text" class="form-control form-row__input" name="firstname" :placeholder="firstname" v-model="firstname" />
+                  <input type="text" class="form-control form-row__input" name="firstname" :placeholder="userInfos.firstname" v-model="firstname" />
                 </div>
               </div>
               <hr>
@@ -41,7 +41,7 @@
                   <h6 class="mb-0">lastname</h6>
                 </div>
                 <div class="col-sm-9 text-secondary">
-                  <input type="text" class="form-control form-row__input" name="lastname" :placeholder="lastname" v-model="lastname" />
+                  <input type="text" class="form-control form-row__input" name="lastname" :placeholder="userInfos.lastname" v-model="lastname" />
                 </div>
               </div>
               <hr>
@@ -50,7 +50,7 @@
                   <h6 class="mb-0">Nickname</h6>
                 </div>
                 <div class="col-sm-9 text-secondary">
-                  <input type="text" class="form-control form-row__input" name="nickname" :placeholder="nickname" v-model="nickname" />
+                  <input type="text" class="form-control form-row__input" name="nickname" :placeholder="userInfos.nickname" v-model="nickname" />
                 </div>
               </div>
               <hr>
@@ -122,14 +122,11 @@ export default {
     }
   },
   components: {Header},
-  created: function () {
+  mounted() {
     if(this.$store.state.user.id === -1){
       this.$router.push('/')
     }
     this.$store.dispatch('getUserInfos')
-    this.firstname = this.userInfos.firstname
-    this.lastname = this.userInfos.lastname
-    this.nickname = this.userInfos.nickname
   },
   methods:{
     logout(){
@@ -243,6 +240,10 @@ export default {
   box-shadow: none!important;
 }
 
+.button--disabled{
+  cursor: not-allowed;
+  background: #cecece;
+}
 .title{
   text-align: center;
   font-size: 32px;
