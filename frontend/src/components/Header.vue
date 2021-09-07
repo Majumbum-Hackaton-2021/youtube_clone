@@ -21,7 +21,7 @@
       <i class="material-icons">videocam</i>
       <i class="material-icons">apps</i>
       <i class="material-icons">notifications</i>
-      <router-link to="/authentication"><i class="material-icons display-this">account_circle</i></router-link>
+      <router-link to="/authentication"><i class="material-icons display-this" :class="this.$store.state.user.id === -1 ? '' : 'green'">account_circle</i></router-link>
     </div>
   </div>
 </template>
@@ -33,5 +33,7 @@ export default {
 </script>
 
 <style scoped>
-
+.green{
+  color: #c8e58a;
+}
 </style>
