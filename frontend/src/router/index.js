@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
 import Watch from "@/views/Watch";
 import Authentication from "@/views/Authentication";
-
+import UserPage from "@/views/UserPage";
 const routes = [
   {
     path: '/',
@@ -18,8 +18,12 @@ const routes = [
     path: '/authentication',
     name: 'Authentication',
     component: Authentication
-  }
-
+  },
+  {
+    path: '/userpage',
+    name: 'UserPage',
+    component: UserPage
+  },
 ]
 
 const router = createRouter({
