@@ -1,11 +1,11 @@
 <template>
   <div class="video">
     <div class="video__thumbnail">
-      <img :src="image" alt="" />
+      <img :src="'http://localhost:8090/videos/image?imageName='+thumbnail" alt="" />
     </div>
     <div class="video__details">
       <div class="author">
-        <img src="http://aninex.com/images/srvc/web_de_icon.png" alt="" />
+        <img :src="channelThumbnail" alt="" />
       </div>
       <div class="title">
         <h3>
@@ -19,17 +19,19 @@
 </template>
 
 <script>
+
 export default {
   name: "VideoBox",
   props: {
-    image: String,
+    thumbnail: String,
     id: String,
     title: String,
     channel: String,
+    channelThumbnail: String,
     edit: String,
     views: String
-
   },
+
 }
 </script>
 

@@ -29,7 +29,8 @@ const store = createStore({
     },
     users: [],
     article: {},
-    articles: []
+    articles: [],
+    videos: {},
   },
   mutations: {
     setStatus: (state , status) => {
@@ -61,7 +62,10 @@ const store = createStore({
         token: '',
       }
       localStorage.removeItem('user');
-    }
+    },
+    fetchVideos: (state, videos) =>{
+      state.videos = videos
+    },
   },
   actions: {
     createAccount: ({commit} , userInfos) => {
@@ -152,6 +156,19 @@ const store = createStore({
         }).then((response) => {
           commit('userInfos', response.data)
           commit('setStatus', ' ')
+          resolve(response)
+        }).catch((error) =>{
+          commit('setStatus' , 'edit-error')
+          reject(error)
+        })
+      })
+    },
+
+    fetchVideos:({commit}) => {
+      return new Promise( (resolve , reject) => {
+        instance.get('/videos/').then((response) => {
+          console.log(response)
+          commit("fetchVideos", response.data)
           resolve(response)
         }).catch((error) =>{
           commit('setStatus' , 'edit-error')
