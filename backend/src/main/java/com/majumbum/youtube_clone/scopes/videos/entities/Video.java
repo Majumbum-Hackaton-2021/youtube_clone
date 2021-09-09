@@ -71,17 +71,24 @@ public class Video {
     @OneToMany
     private List<Comment> comments = new LinkedList<>();
 
+    @Column
+    @NotBlank
+    @NotEmpty
+    @NotNull
+    private String videoLink;
+
     @SuppressWarnings("unused")
     public Video() {
     }
 
-    public Video(String title, String author, String description, String thumbnail, String channelThumbnail) {
+    public Video(String title, String author, String description, String thumbnail, String channelThumbnail, String videoLink) {
         this.title = title;
         this.author = author;
         this.description = description;
         this.dayPosted = LocalDate.now();
         this.thumbnail = thumbnail;
         this.channelThumbnail = channelThumbnail;
+        this.videoLink = videoLink;
     }
 
     public long getId() {
@@ -164,6 +171,14 @@ public class Video {
         this.comments = comments;
     }
 
+    public String getVideoLink() {
+        return videoLink;
+    }
+
+    public void setVideoLink(String videoLink) {
+        this.videoLink = videoLink;
+    }
+
     @Override
     public String toString() {
         return "Video{" +
@@ -177,6 +192,7 @@ public class Video {
                 ", thumbnail='" + thumbnail + '\'' +
                 ", channelThumbnail='" + channelThumbnail + '\'' +
                 ", comments=" + comments +
+                ", videoLink='" + videoLink + '\'' +
                 '}';
     }
 }
