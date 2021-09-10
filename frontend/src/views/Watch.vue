@@ -1,7 +1,7 @@
 <template>
 <Header/>
   <div>
-    <h1>Watch</h1>
+    <h1>Watch Stella</h1>
   </div>
 </template>
 
