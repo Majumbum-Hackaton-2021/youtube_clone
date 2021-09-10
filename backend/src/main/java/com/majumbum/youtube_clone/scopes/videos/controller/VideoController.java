@@ -63,7 +63,6 @@ public class VideoController {
                 .body(bytes);
     }
 
-
     @GetMapping(value = "/videoFile",
             produces ="video/mp4")
     public ResponseEntity<?> getVideoFile(@RequestParam("videoName") Optional<String> name) throws IOException {

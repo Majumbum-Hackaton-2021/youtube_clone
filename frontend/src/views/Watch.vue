@@ -3,22 +3,20 @@
   <div class="mainBody">
     <AsideMenu/>
     <div class="video-column">
-      <div class="video-player" style="position: relative">
-        <video controls width="500" height="500" >
-          <source :src="'http://localhost:8090/videos/videoFile?videoName='+getVideo.videoLink" type="video/mp4">
-          Your browser does not support the video tag.
-        </video>
-      </div>
 
-      <h3 class="video-title">{{getVideo.title}}</h3>
+      <video controls width="600" height="400" :src="link">
+        Your browser does not support the video tag.
+      </video>
+
+      <h3 class="video-title">{{video.title}}</h3>
 
       <div class="video-info-main">
-        <h4 class="view-counter">{{getVideo.views}} Views</h4>
+        <h4 class="view-counter">{{video.views}} Views</h4>
 
         <div class="video-info-right">
           <div class="likes-section">
             <i class="material-icons">thumb_up</i>
-            <span class="likes-counter">{{getVideo.likes}}</span>
+            <span class="likes-counter">{{video.likes}}</span>
           </div>
 
           <div class="share-section">
@@ -29,16 +27,16 @@
       </div>
 
       <div class="description-box">
-        <img :src="getVideo.channelThumbnail" alt="Profile Picture" class="profile-pic">
+        <img :src="video.channelThumbnail" alt="Profile Picture" class="profile-pic">
 
         <div class="description-div">
-          <h5>{{getVideo.author}}</h5>
-          <p>Published on {{getVideo.dayPosted}}</p>
-          <p>{{getVideo.description}}</p>
+          <h5>{{video.author}}</h5>
+          <p>Published on {{video.dayPosted}}</p>
+          <p>{{video.description}}</p>
         </div>
       </div>
 
-      <h5 style="font-weight: normal">{{getVideo.comments}} Comments</h5>
+      <h5 style="font-weight: normal">{{commentsNumber}} Comments</h5>
 
 
       <div style="display: flex">
@@ -92,21 +90,30 @@
 <script>
 import Header from "@/components/Header";
 import AsideMenu from "@/components/AsideMenu";
+import axios from "axios";
 export default {
   name: "Watch",
   components: {AsideMenu, Header},
   props: {
     id : String,
   },
-  created() {
-    this.$store.dispatch("fetchVideo", this.id)
+  data: () => ({
+    video: Object,
+    link : String,
+    commentsNumber: Number,
+  }),
+
+  mounted() {
+    let that = this
+    axios.get('http://localhost:8090/videos/unique?id='+this.id).then((response) => {
+      console.log(response.data)
+      that.video = response.data
+      that.commentsNumber = response.data.comments.length
+      that.link = 'http://localhost:8090/videos/videoFile?videoName='+response.data.videoLink
+    }).catch((error) =>{
+      console.log(error)
+    })
   },
-  computed: {
-    getVideo: function () {
-      console.log(this.$store.state.video)
-      return this.$store.state.video
-    },
-  }
 }
 </script>
 
@@ -120,11 +127,9 @@ export default {
   padding: 0 100px 100px;
   width: -webkit-fill-available;
   margin-bottom: 100px;
+
 }
 
-video{
-  z-index: 2;
-}
 .video-title{
   font-weight: normal;
   line-height: 0.9rem;
@@ -148,6 +153,7 @@ video{
   min-width: 100%;
   min-height: 100%;
   object-fit: fill;
+  z-index: 2;
 }
 
 .video-player iframe {

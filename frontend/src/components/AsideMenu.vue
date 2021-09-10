@@ -1,10 +1,12 @@
 <template>
   <div class="sidebar">
     <div class="sidebar__categories">
-      <div class="sidebar__category">
-        <i class="material-icons">home</i>
-        <span>Home</span>
-      </div>
+      <router-link to="/">
+        <div class="sidebar__category">
+          <i class="material-icons">home</i>
+          <span>Home</span>
+        </div>
+      </router-link>
       <div class="sidebar__category">
         <i class="material-icons">local_fire_department</i>
         <span>Trending</span>
@@ -48,5 +50,8 @@ export default {
 </script>
 
 <style scoped>
-
+a{
+  text-decoration: none;
+  text-underline: none;
+}
 </style>

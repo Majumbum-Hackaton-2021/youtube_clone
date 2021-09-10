@@ -10,7 +10,7 @@ public enum TestVideos {
             "https://avatars.dicebear.com/api/male/302.svg", "two.mp4"),
     VIDEOS_THREE( "TROIS" , "Admin",
             "TROIS test video with this description", "three.jpg",
-            "https://avatars.dicebear.com/api/male/302.svg", "tree.mp4"),
+            "https://avatars.dicebear.com/api/male/302.svg", "three.mp4"),
     VIDEOS_FOUR( "QUATRE" , "Admin",
             "QUATRE test video with this description", "four.jpg",
             "https://avatars.dicebear.com/api/male/302.svg", "four.mp4"),
