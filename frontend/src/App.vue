@@ -123,29 +123,7 @@ hr {
   overflow-y: scroll;
 }
 
-.videos__container {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  overflow-y: scroll;
-}
 
-.video {
-  width: 310px;
-  margin-bottom: 30px;
-}
-
-.video__thumbnail {
-  width: 100%;
-  height: 170px;
-}
-
-.video__thumbnail img {
-  object-fit: cover;
-  height: 100%;
-  width: 100%;
-}
 
 .author img {
   object-fit: cover;
