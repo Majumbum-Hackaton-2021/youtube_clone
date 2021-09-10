@@ -1,7 +1,7 @@
 <template>
 <Header/>
   <div class="mainBody">
-    <h1>Watch stella</h1>
+    <h1>Watch</h1>
 
     <h3>Pardon jai besion des criques</h3>
     <AsideMenu/>
