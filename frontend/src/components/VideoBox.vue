@@ -1,6 +1,6 @@
 <template>
   <div class="container col-12 col-md-6 col-lg-4" style="margin: 0">
-    <router-link to="watch">
+    <router-link :to="{name: 'Watch', params: { id: videoId}}">
       <div class="video">
         <div class="video__thumbnail">
           <img :src="'http://localhost:8090/videos/image?imageName='+thumbnail" alt="" />
@@ -14,7 +14,7 @@
               {{title}}
             </h3>
             {{channel}}
-            <span>{{views}} Views • {{edit }}</span>
+            <span>{{views}} Views • {{edit}}</span>
           </div>
         </div>
       </div>
@@ -28,7 +28,7 @@ export default {
   name: "VideoBox",
   props: {
     thumbnail: String,
-    id: String,
+    videoId: Number,
     title: String,
     channel: String,
     channelThumbnail: String,

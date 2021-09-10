@@ -10,9 +10,10 @@ const routes = [
     component: Home
   },
   {
-    path: '/watch',
+    path: '/watch:id',
     name: 'Watch',
-    component: Watch
+    component: Watch,
+    props: true
   },
   {
     path: '/authentication',

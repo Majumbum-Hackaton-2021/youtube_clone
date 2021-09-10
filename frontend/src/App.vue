@@ -13,6 +13,7 @@
 
 body {
   font-family: 'Roboto', sans-serif;
+  overflow-y: scroll;
 }
 
 .material-icons {
@@ -70,14 +71,12 @@ body {
 .mainBody {
   height: calc(100vh - 70px);
   display: flex;
-  overflow: hidden;
 }
 
 .sidebar {
   height: 100%;
   min-width: 190px;
   background-color: white;
-  overflow-y: scroll;
 }
 
 .sidebar__categories {
@@ -120,7 +119,6 @@ hr {
   height: 100%;
   padding: 15px 15px;
   border-top: 1px solid #ddd;
-  overflow-y: scroll;
 }
 
 

@@ -4,19 +4,19 @@ public enum TestVideos {
 
     VIDEOS_ONE( "UN" , "Admin",
             "UNO test video with this description", "one.jpg",
-            "https://avatars.dicebear.com/api/male/302.svg", "one.mvk"),
+            "https://avatars.dicebear.com/api/male/302.svg", "one.mp4"),
     VIDEOS_TWO( "DEUX" , "Admin",
             "DEUX test video with this description", "two.jpg",
-            "https://avatars.dicebear.com/api/male/302.svg", "two.mvk"),
+            "https://avatars.dicebear.com/api/male/302.svg", "two.mp4"),
     VIDEOS_THREE( "TROIS" , "Admin",
             "TROIS test video with this description", "three.jpg",
-            "https://avatars.dicebear.com/api/male/302.svg", "tree.mvk"),
+            "https://avatars.dicebear.com/api/male/302.svg", "tree.mp4"),
     VIDEOS_FOUR( "QUATRE" , "Admin",
             "QUATRE test video with this description", "four.jpg",
-            "https://avatars.dicebear.com/api/male/302.svg", "four.mvk"),
+            "https://avatars.dicebear.com/api/male/302.svg", "four.mp4"),
     VIDEOS_FIVE( "CINQ" , "Admin",
             "CINQ test video with this description", "five.jpg",
-            "https://avatars.dicebear.com/api/male/302.svg", "five.mvk");
+            "https://avatars.dicebear.com/api/male/302.svg", "five.mp4");
 
     public String title;
     public String description;

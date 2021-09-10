@@ -31,6 +31,7 @@ const store = createStore({
     article: {},
     articles: [],
     videos: {},
+    video: {},
   },
   mutations: {
     setStatus: (state , status) => {
@@ -65,6 +66,9 @@ const store = createStore({
     },
     fetchVideos: (state, videos) =>{
       state.videos = videos
+    },
+    fetchVideo: (state, video)=>{
+      state.video = video
     },
   },
   actions: {
@@ -167,8 +171,18 @@ const store = createStore({
     fetchVideos:({commit}) => {
       return new Promise( (resolve , reject) => {
         instance.get('/videos/').then((response) => {
-          console.log(response)
           commit("fetchVideos", response.data)
+          resolve(response)
+        }).catch((error) =>{
+          commit('setStatus' , 'edit-error')
+          reject(error)
+        })
+      })
+    },
+    fetchVideo:({commit}, videoId) => {
+      return new Promise( (resolve , reject) => {
+        instance.get('/videos/unique?id='+videoId).then((response) => {
+          commit("fetchVideo", response.data)
           resolve(response)
         }).catch((error) =>{
           commit('setStatus' , 'edit-error')

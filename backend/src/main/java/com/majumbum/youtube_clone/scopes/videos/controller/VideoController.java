@@ -34,6 +34,19 @@ public class VideoController {
         return videoService.getVideos();
     }
 
+    @GetMapping("/unique")
+    public ResponseEntity<?> getVideo(@RequestParam("id") Optional<Long> videoId){
+        if(videoId.isEmpty())
+            return ResponseEntity.ok(new MessageResponse("id param is needed"));
+        Optional<Video> video = videoService.getVideoById(videoId.get());
+
+        if(video.isEmpty())
+            return ResponseEntity.ok(new MessageResponse("video dont exist"));
+
+        return ResponseEntity.ok(video.get());
+    }
+
+
     @GetMapping(value = "/image",
             produces = MediaType.IMAGE_JPEG_VALUE)
     public ResponseEntity<?> getImage(@RequestParam("imageName") Optional<String> name) throws IOException {
@@ -47,6 +60,23 @@ public class VideoController {
         return ResponseEntity
                 .ok()
                 .contentType(MediaType.IMAGE_JPEG)
+                .body(bytes);
+    }
+
+
+    @GetMapping(value = "/videoFile",
+            produces ="video/mp4")
+    public ResponseEntity<?> getVideoFile(@RequestParam("videoName") Optional<String> name) throws IOException {
+
+        if(name.isEmpty())
+            return ResponseEntity.ok(new MessageResponse("videoName param is needed"));
+
+        var videoFile = new PathResource("upload-dir/"+ name.get());
+        byte[] bytes = StreamUtils.copyToByteArray(videoFile.getInputStream());
+
+        return ResponseEntity
+                .ok()
+                .contentType(MediaType.MULTIPART_FORM_DATA)
                 .body(bytes);
     }
 }

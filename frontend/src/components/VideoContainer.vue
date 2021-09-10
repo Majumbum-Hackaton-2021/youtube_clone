@@ -2,7 +2,7 @@
   <div class="row video_container">
       <VideoBox v-for="video in getVideos" :key="video.id" :title="video.title"
       :channel="video.author" :views="video.views" :edit="video.dayPosted" :thumbnail="video.thumbnail"
-                :channelThumbnail="video.channelThumbnail"
+                :channelThumbnail="video.channelThumbnail" :videoId="video.id"
       />
   </div>
 </template>
