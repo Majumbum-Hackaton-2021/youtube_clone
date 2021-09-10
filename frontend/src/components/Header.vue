@@ -32,10 +32,9 @@
 export default {
   name: "Header",
   mounted() {
-    if(this.$store.state.user.id === -1){
-      this.$router.push('/')
+    if(this.$store.state.user.id !== -1){
+      this.$store.dispatch('getUserInfos')
     }
-    this.$store.dispatch('getUserInfos')
   },
   computed: {
     isLoggedIn: function () {

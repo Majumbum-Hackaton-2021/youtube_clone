@@ -102,9 +102,13 @@ export default {
         channelThumbnail: this.$store.state.userInfos.image,
         videoLink: videoName
       }
+
+      let that = this
       axios.post("http://localhost:8090/videos/addVideo",video).then(response =>{
         console.log(response)
+        that.$router.push("/")
       })
+
     }
   },
   computed: {
