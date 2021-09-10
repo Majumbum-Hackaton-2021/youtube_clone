@@ -2,6 +2,7 @@ package com.majumbum.youtube_clone.scopes.videos.controller;
 
 import com.majumbum.youtube_clone.YoutubeCloneApplication;
 import com.majumbum.youtube_clone.scopes.auth.payload.response.MessageResponse;
+import com.majumbum.youtube_clone.scopes.videos.entities.Comment;
 import com.majumbum.youtube_clone.scopes.videos.entities.Video;
 import com.majumbum.youtube_clone.scopes.videos.services.VideoService;
 import org.h2.util.IOUtils;
@@ -32,6 +33,24 @@ public class VideoController {
     @GetMapping("/")
     public List<Video> getAllVideos(){
         return videoService.getVideos();
+    }
+
+    @GetMapping("/view")
+    public ResponseEntity<?> addView(@RequestParam("id") Optional<Long> videoId){
+        if(videoId.isEmpty())
+            return ResponseEntity.ok(new MessageResponse("id param is needed"));
+
+        videoService.updateViews(videoId.get());
+        return ResponseEntity.ok(new MessageResponse("Video up to date"));
+    }
+
+    @GetMapping("/like")
+    public ResponseEntity<?> addLike(@RequestParam("id") Optional<Long> videoId){
+        if(videoId.isEmpty())
+            return ResponseEntity.ok(new MessageResponse("id param is needed"));
+
+        videoService.updateLikes(videoId.get());
+        return ResponseEntity.ok(new MessageResponse("Video up to date"));
     }
 
     @GetMapping("/unique")
@@ -78,4 +97,18 @@ public class VideoController {
                 .contentType(MediaType.MULTIPART_FORM_DATA)
                 .body(bytes);
     }
+
+    @PostMapping("/addComment")
+    public ResponseEntity<?> addComment(@RequestBody Comment comment){
+
+        if(comment == null)
+            return ResponseEntity.badRequest().body(new MessageResponse("Error: Comment invalid"));
+
+        System.out.println(comment);
+        videoService.addComment(comment);
+
+        return ResponseEntity.ok(new MessageResponse("Comment successfully added"));
+    }
+
+
 }

@@ -15,8 +15,8 @@
 
         <div class="video-info-right">
           <div class="likes-section">
-            <i class="material-icons">thumb_up</i>
-            <span class="likes-counter">{{video.likes}}</span>
+            <i class="material-icons" id="like_btn" @click="updateLike('like_btn')">thumb_up</i>
+            <span class="likes-counter">{{likes}}</span>
           </div>
 
           <div class="share-section">
@@ -39,47 +39,33 @@
       <h5 style="font-weight: normal">{{commentsNumber}} Comments</h5>
 
 
-      <div style="display: flex">
+      <div style="display: flex" v-if="isLoggedIn">
         <div class="form__group field">
-          <input type="input" class="form__field" placeholder="Name" name="name" id='name' required />
-          <label for="name" class="form__label">Comment</label>
+          <input type="text" class="form__field" placeholder="Your Comment" name="comment" id='comment' v-model="comment" required />
+          <label for="comment" class="form__label">Comment</label>
         </div>
 
         <div class="comment_btn_wrapper">
-          <button class="btn btn-info">Comment</button>
+          <button class="btn btn-info" :class="{'button--disabled' : !validatedFields}" @click="addComment">Comment</button>
         </div>
       </div>
 
       <div class="container" style="margin: 0; padding: 0">
-        <div class="dialogbox">
+        <div class="dialogbox" v-for="comment in video.comments" :key="comment.id">
           <div class="body">
             <span class="tip tip-up"></span>
             <div class="message">
               <div class="image_container">
-                <img src="https://avatars.dicebear.com/api/male/302.svg">
-                <span>Admin</span>
+                <img :src="comment.authorImage">
+                <span>{{comment.authorName}}</span>
               </div>
               <div class="text-container">
-                <span>I just made a comment about this comment box which is purely made from CSS.</span>
+                <span>{{comment.comment}}</span>
               </div>
             </div>
           </div>
         </div>
 
-        <div class="dialogbox">
-          <div class="body">
-            <span class="tip tip-up"></span>
-            <div class="message">
-              <div class="image_container">
-                <img src="https://avatars.dicebear.com/api/male/302.svg">
-                <span>Admin</span>
-              </div>
-              <div class="text-container">
-                <span>I just made a comment about this comment box which is purely made from CSS.</span>
-              </div>
-            </div>
-          </div>
-        </div>
         <br><br><br><br>
       </div>
     </div>
@@ -101,24 +87,88 @@ export default {
     video: Object,
     link : String,
     commentsNumber: Number,
+    likes :0,
+    comment : ''
   }),
 
+  computed:{
+    validatedFields: function () {
+        return this.comment !== '';
+      },
+    isLoggedIn: function () {
+      return this.$store.state.user.id !== -1
+    },
+  },
   mounted() {
     let that = this
+
+    if(this.isLoggedIn)
+      this.$store.dispatch('getUserInfos')
+
+    axios.get('http://localhost:8090/videos/view?id='+this.id).then((response) => {
+      console.log(response)
+    }).catch((error) =>{
+      console.log(error)
+    })
+
     axios.get('http://localhost:8090/videos/unique?id='+this.id).then((response) => {
-      console.log(response.data)
       that.video = response.data
       that.commentsNumber = response.data.comments.length
+      that.likes = response.data.likes
       that.link = 'http://localhost:8090/videos/videoFile?videoName='+response.data.videoLink
     }).catch((error) =>{
       console.log(error)
     })
   },
+
+  methods: {
+    updateLike(like_btn){
+      axios.get('http://localhost:8090/videos/like?id='+this.id).then((response) => {
+        console.log(response)
+      }).catch((error) =>{
+        console.log(error)
+      })
+      let elem = document.getElementById(like_btn)
+      elem.classList.add("liked")
+      this.likes ++
+    },
+    addComment(){
+      let that = this
+      let authorName = this.$store.state.userInfos.nickname
+      let authorImage = this.$store.state.userInfos.image
+
+      axios.post('http://localhost:8090/videos/addComment', {
+        authorName : authorName ,
+        videoId : that.id,
+        comment: that.comment,
+        authorImage: authorImage
+      }).then((response) => {
+        console.log(response)
+
+        axios.get('http://localhost:8090/videos/unique?id='+this.id).then((response) => {
+          that.video = response.data
+          that.commentsNumber = response.data.comments.length
+          that.likes = response.data.likes
+          that.link = 'http://localhost:8090/videos/videoFile?videoName='+response.data.videoLink
+        }).catch((error) =>{
+          console.log(error)
+        })
+
+      }).catch((error) =>{
+        console.log(error)
+      })
+
+      this.comment = ''
+    }
+  }
 }
 </script>
 
 <style scoped>
-
+/deep/
+.liked{
+  color: #2196F3;
+}
 .mainBody{
   margin-bottom: 220px;
 }
@@ -429,6 +479,19 @@ export default {
     margin-right: 4.8%;
     margin-left: 4.8%;
   }
+}
+
+.button--disabled {
+  background:#cecece;
+  color:#ececec
+}
+.button--disabled:hover {
+  cursor:not-allowed;
+  background:#cecece;
+}
+
+.comment--disabled:hover{
+  cursor:not-allowed;
 }
 
 </style>

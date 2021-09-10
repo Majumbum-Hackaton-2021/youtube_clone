@@ -18,16 +18,21 @@ public class Comment {
     @Column
     private Long videoId;
 
+
+    @Column
+    private String authorImage;
+
     @Column(length=10485760)
     private String comment;
 
     @SuppressWarnings("unused")
     public Comment() { }
 
-    public Comment(String authorName, Long videoId , String comment) {
+    public Comment(String authorName, Long videoId , String comment, String authorImage) {
         this.authorName = authorName;
         this.videoId = videoId;
         this.comment = comment;
+        this.authorImage = authorImage;
     }
 
     public Long getId() {
@@ -62,12 +67,21 @@ public class Comment {
         this.videoId = videoId;
     }
 
+    public String getAuthorImage() {
+        return authorImage;
+    }
+
+    public void setAuthorImage(String authorImage) {
+        this.authorImage = authorImage;
+    }
+
     @Override
     public String toString() {
         return "Comment{" +
                 "id=" + id +
                 ", authorName='" + authorName + '\'' +
                 ", videoId=" + videoId +
+                ", authorImage='" + authorImage + '\'' +
                 ", comment='" + comment + '\'' +
                 '}';
     }
