@@ -3,6 +3,7 @@ import Home from '../views/Home.vue'
 import Watch from "@/views/Watch";
 import Authentication from "@/views/Authentication";
 import UserPage from "@/views/UserPage";
+import Upload from "@/views/Upload";
 const routes = [
   {
     path: '/',
@@ -24,6 +25,11 @@ const routes = [
     path: '/userpage',
     name: 'UserPage',
     component: UserPage
+  },
+  {
+    path: '/upload',
+    name: 'Upload',
+    component: Upload
   },
 ]
 

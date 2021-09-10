@@ -18,22 +18,42 @@
 
     <div class="header__icons">
       <i class="material-icons display-this">search</i>
-      <i class="material-icons">videocam</i>
+      <router-link to="/upload">
+        <i class="material-icons" v-if="isLoggedIn && isModerator">videocam</i>
+      </router-link>
       <i class="material-icons">apps</i>
       <i class="material-icons">notifications</i>
-      <router-link to="/authentication"><i class="material-icons display-this" :class="this.$store.state.user.id === -1 ? '' : 'green'">account_circle</i></router-link>
+      <router-link to="/authentication"><i class="material-icons display-this" :class="!isLoggedIn ? '' : 'green'">account_circle</i></router-link>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "Header"
+  name: "Header",
+  mounted() {
+    if(this.$store.state.user.id === -1){
+      this.$router.push('/')
+    }
+    this.$store.dispatch('getUserInfos')
+  },
+  computed: {
+    isLoggedIn: function () {
+      return this.$store.state.user.id !== -1
+    },
+    isModerator: function () {
+      return this.$store.state.userInfos.moderator === true
+    },
+  },
 }
 </script>
 
 <style scoped>
 .green{
   color: #c8e58a;
+}
+
+a{
+  text-decoration: none;
 }
 </style>

@@ -35,6 +35,16 @@ public class VideoController {
         return videoService.getVideos();
     }
 
+    @PostMapping("/addVideo")
+    public ResponseEntity<?> addVideo(@RequestBody Optional<Video> video){
+        if(video.isEmpty())
+            return ResponseEntity.ok(new MessageResponse("video param is needed"));
+
+        System.out.println(video.get());
+        videoService.saveVideo(video.get());
+        return ResponseEntity.ok(new MessageResponse("Video was uploaded"));
+    }
+
     @GetMapping("/view")
     public ResponseEntity<?> addView(@RequestParam("id") Optional<Long> videoId){
         if(videoId.isEmpty())

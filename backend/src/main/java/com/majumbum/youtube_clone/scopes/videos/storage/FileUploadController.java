@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/upload")
 public class FileUploadController {
@@ -19,7 +20,7 @@ public class FileUploadController {
 
     @PostMapping("/")
     public ResponseEntity<?> handleFileUpload(@RequestBody MultipartFile file) {
-
+        System.err.println(file);
         if(file == null)
             return ResponseEntity.ok(new MessageResponse("The file should not be null"));
         storageService.store(file);
