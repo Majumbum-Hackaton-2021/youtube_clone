@@ -51,10 +51,13 @@ a {
 
 .video__thumbnail {
   width: 100%;
+  max-height: 179px;
+  position: relative;
+  overflow: hidden;
 }
 
 .video__thumbnail img {
-  object-fit: cover;
+  object-fit: fill;
   height: 100%;
   width: 100%;
 }
