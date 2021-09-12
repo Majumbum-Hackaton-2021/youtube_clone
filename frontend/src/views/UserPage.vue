@@ -126,7 +126,6 @@ export default {
     if(this.$store.state.user.id !== -1){
       this.$store.dispatch('getUserInfos')
     }
-
   },
   methods:{
     logout(){

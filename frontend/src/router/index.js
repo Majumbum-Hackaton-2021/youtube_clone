@@ -4,6 +4,7 @@ import Watch from "@/views/Watch";
 import Authentication from "@/views/Authentication";
 import UserPage from "@/views/UserPage";
 import Upload from "@/views/Upload";
+import UserAdmin from "@/views/UserAdmin";
 const routes = [
   {
     path: '/',
@@ -30,6 +31,11 @@ const routes = [
     path: '/upload',
     name: 'Upload',
     component: Upload
+  },
+  {
+    path: '/useradmin',
+    name: 'UserAdmin',
+    component: UserAdmin
   },
 ]
 

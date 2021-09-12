@@ -25,8 +25,7 @@ const store = createStore({
   state: {
     status: '',
     user: user,
-    userInfos:{
-    },
+    userInfos:{},
     users: [],
     article: {},
     articles: [],
@@ -38,20 +37,27 @@ const store = createStore({
       state.status = status
     },
     logUser: (state, user) =>{
+      let now = new Date()
       instance.defaults.headers.common['Authorization'] = user.token
+      user.expiry = now.getTime() + 60
       localStorage.setItem('user', JSON.stringify(user))
       state.user = user
     },
     userInfos: (state , userInfos) => {
-      state.userInfos = userInfos
-      if(userInfos.grantedAuthorities !== undefined){
+      if(userInfos.id === undefined){
+        this.logout(state)
+        state.userInfos = {}
+      }else{
+        state.userInfos = userInfos
+        if(userInfos.grantedAuthorities !== undefined){
 
-        state.userInfos.grantedAuthorities.forEach((e)=>{
-          if(e === 'ADMIN')
-            userInfos["admin"]=true
-          if(e === 'MODERATOR')
-            userInfos["moderator"]=true
-        })
+          state.userInfos.grantedAuthorities.forEach((e)=>{
+            if(e === 'ADMIN')
+              userInfos["admin"]=true
+            if(e === 'MODERATOR')
+              userInfos["moderator"]=true
+          })
+        }
       }
     },
     loadUsers: (state, users) =>{
@@ -188,6 +194,15 @@ const store = createStore({
           commit('setStatus' , 'edit-error')
           reject(error)
         })
+      })
+    },
+    deleteVideo: ({commit} , videoId) => {
+      instance.get('/videos/deletevideo?id='+ videoId).
+      then((response) => {
+        store.dispatch("fetchVideos")
+        commit("fetchVideos", response.data)
+      }).catch((error) =>{
+        console.log(error)
       })
     },
   }

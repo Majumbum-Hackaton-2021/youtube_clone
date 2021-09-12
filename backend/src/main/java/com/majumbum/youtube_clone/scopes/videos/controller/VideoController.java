@@ -41,7 +41,7 @@ public class VideoController {
             return ResponseEntity.ok(new MessageResponse("video param is needed"));
 
         System.out.println(video.get());
-        videoService.saveVideo(video.get());
+        videoService.saveNewVideo(video.get());
         return ResponseEntity.ok(new MessageResponse("Video was uploaded"));
     }
 
@@ -120,5 +120,12 @@ public class VideoController {
         return ResponseEntity.ok(new MessageResponse("Comment successfully added"));
     }
 
+    @GetMapping("/deletevideo")
+    public ResponseEntity<?> deleteVideo(@RequestParam("id") Optional<Long> videoId){
+        if(videoId.isEmpty())
+            return ResponseEntity.ok(new MessageResponse("id param is needed"));
 
+        videoService.deleteVideoById(videoId.get());
+        return ResponseEntity.ok(new MessageResponse("Video is deleted"));
+    }
 }

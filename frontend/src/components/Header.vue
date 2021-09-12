@@ -21,8 +21,9 @@
       <router-link to="/upload">
         <i class="material-icons" v-if="isLoggedIn && isModerator">videocam</i>
       </router-link>
-      <i class="material-icons">apps</i>
-      <i class="material-icons">notifications</i>
+      <router-link to="/useradmin">
+        <i class="material-icons">people_alt</i>
+      </router-link>
       <router-link to="/authentication"><i class="material-icons display-this" :class="!isLoggedIn ? '' : 'green'">account_circle</i></router-link>
     </div>
   </div>

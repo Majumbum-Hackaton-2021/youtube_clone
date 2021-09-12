@@ -7,6 +7,7 @@ import com.majumbum.youtube_clone.scopes.videos.repository.VideoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -22,6 +23,12 @@ public class VideoService {
 
     public void saveVideo(Video video){
         if(video == null) throw new NullPointerException("Video must no be null");
+        videoRepository.save(video);
+    }
+
+    public void saveNewVideo(Video video){
+        if(video == null) throw new NullPointerException("Video must no be null");
+        video.setDayPosted(LocalDate.now());
         videoRepository.save(video);
     }
 

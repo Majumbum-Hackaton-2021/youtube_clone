@@ -25,7 +25,7 @@ export default {
 
 <style scoped>
 .video_container{
-  overflow-y: scroll;
   justify-content: left;
+  max-height: 283px;
 }
 </style>
