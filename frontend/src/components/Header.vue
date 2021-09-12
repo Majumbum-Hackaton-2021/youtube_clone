@@ -21,7 +21,7 @@
       <router-link to="/upload">
         <i class="material-icons" v-if="isLoggedIn && isModerator">videocam</i>
       </router-link>
-      <router-link to="/useradmin">
+      <router-link to="/useradmin" v-if="isLoggedIn && isAdmin">
         <i class="material-icons">people_alt</i>
       </router-link>
       <router-link to="/authentication"><i class="material-icons display-this" :class="!isLoggedIn ? '' : 'green'">account_circle</i></router-link>
@@ -43,6 +43,9 @@ export default {
     },
     isModerator: function () {
       return this.$store.state.userInfos.moderator === true
+    },
+    isAdmin: function () {
+      return this.$store.state.userInfos.admin === true
     },
   },
 }
