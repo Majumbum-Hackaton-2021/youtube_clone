@@ -128,4 +128,18 @@ public class VideoController {
         videoService.deleteVideoById(videoId.get());
         return ResponseEntity.ok(new MessageResponse("Video is deleted"));
     }
+
+    @GetMapping("/deleteComment")
+    public ResponseEntity<?> deleteComment(@RequestParam("id") Optional<Long> commentId){
+        if(commentId.isEmpty())
+            return ResponseEntity.ok(new MessageResponse("id param is needed"));
+
+        Optional<Video> video = videoService.deleteCommentById(commentId.get());
+
+        if(video.isEmpty())
+            ResponseEntity.ok(new MessageResponse("Video dont exist"));
+
+        return ResponseEntity.ok(video.get());
+    }
+
 }

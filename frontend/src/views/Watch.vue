@@ -55,6 +55,7 @@
           <div class="body">
             <span class="tip tip-up"></span>
             <div class="message">
+              <span v-if="isModerator || isMyComment(comment)" class="material-icons close" @click="deleteComment(comment.id)">close</span>
               <div class="image_container">
                 <img :src="comment.authorImage">
                 <span>{{comment.authorName}}</span>
@@ -98,6 +99,9 @@ export default {
     isLoggedIn: function () {
       return this.$store.state.user.id !== -1
     },
+    isModerator: function () {
+      return this.$store.state.userInfos.moderator === true
+    },
   },
   mounted() {
     let that = this
@@ -122,6 +126,9 @@ export default {
   },
 
   methods: {
+    isMyComment(comment){
+      return this.$store.state.userInfos.nickname === comment.authorName
+    },
     updateLike(like_btn){
       axios.get('http://localhost:8090/videos/like?id='+this.id).then((response) => {
         console.log(response)
@@ -159,7 +166,20 @@ export default {
       })
 
       this.comment = ''
-    }
+    },
+    deleteComment(id){
+      let that = this
+      if(confirm("Do you really want to delete this comment ? ")){
+        axios.get('http://localhost:8090/videos/deleteComment?id='+id).then((response) => {
+          that.video = response.data
+          that.commentsNumber = response.data.comments.length
+          that.likes = response.data.likes
+          that.link = 'http://localhost:8090/videos/videoFile?videoName='+response.data.videoLink
+        }).catch((error) =>{
+          console.log(error)
+        })
+      }
+    },
   }
 }
 </script>
@@ -168,6 +188,14 @@ export default {
 /deep/
 .liked{
   color: #2196F3;
+}
+
+.close{
+  right: 0;
+  color: red;
+  position: absolute;
+  cursor: pointer;
+  z-index: 1;
 }
 .mainBody{
   margin-bottom: 220px;
@@ -441,6 +469,7 @@ export default {
   font-size: 14px;
   line-height: 1.5;
   color: #797979;
+  position: relative;
 }
 
 .message img{
@@ -464,6 +493,7 @@ export default {
 .image_container{
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
 .image_container span{

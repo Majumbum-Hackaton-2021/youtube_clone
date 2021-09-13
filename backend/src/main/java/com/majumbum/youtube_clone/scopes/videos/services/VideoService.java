@@ -76,7 +76,7 @@ public class VideoService {
     }
 
 
-    public void deleteCommentById(Long commentId){
+    public Optional<Video> deleteCommentById(Long commentId){
         if(commentId == null) throw new NullPointerException("comment should not be null");
 
         Optional<Comment> comment = commentRepository.findById(commentId);
@@ -91,6 +91,8 @@ public class VideoService {
                 && c.getComment().equals(comment.get().getComment()));
 
         saveVideo(video.get());
+
+        return video;
     }
 
     public void deleteAllComments(Video video){

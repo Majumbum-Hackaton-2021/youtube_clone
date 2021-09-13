@@ -15,8 +15,7 @@ public enum TestUser {
             new HashSet<UserRole>(Arrays.asList(UserRole.USER , UserRole.MODERATOR))),
     USER_THREE("user" , "user" , "user@mail.com" ,
                      "user" , "test", Gender.female,
-                     new HashSet<UserRole>(Arrays.asList(UserRole.USER , UserRole.MODERATOR)));
-
+                     new HashSet<UserRole>(Arrays.asList(UserRole.USER)));
 
     public final String firstname;
     public final String lastname;
