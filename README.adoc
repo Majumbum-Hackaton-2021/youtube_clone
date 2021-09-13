@@ -15,6 +15,7 @@ USER (Not logged in)
 . See Videos
 . Register
 . Login
+. Search video by title (optional)
 
 USER (logged in)
 
