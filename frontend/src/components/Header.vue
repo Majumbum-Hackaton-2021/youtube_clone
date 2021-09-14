@@ -9,13 +9,6 @@
       </div>
     </div>
 
-    <div class="header__search">
-      <form action="">
-        <input type="text" placeholder="Search" />
-        <button><i class="material-icons">search</i></button>
-      </form>
-    </div>
-
     <div class="header__icons">
       <i class="material-icons display-this">search</i>
       <router-link to="/upload">
