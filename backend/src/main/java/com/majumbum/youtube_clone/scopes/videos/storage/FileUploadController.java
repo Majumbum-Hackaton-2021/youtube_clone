@@ -20,7 +20,6 @@ public class FileUploadController {
 
     @PostMapping("/")
     public ResponseEntity<?> handleFileUpload(@RequestBody MultipartFile file) {
-        System.err.println(file);
         if(file == null)
             return ResponseEntity.ok(new MessageResponse("The file should not be null"));
         storageService.store(file);

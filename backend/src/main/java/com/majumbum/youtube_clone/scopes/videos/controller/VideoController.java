@@ -40,7 +40,6 @@ public class VideoController {
         if(video.isEmpty())
             return ResponseEntity.ok(new MessageResponse("video param is needed"));
 
-        System.out.println(video.get());
         videoService.saveNewVideo(video.get());
         return ResponseEntity.ok(new MessageResponse("Video was uploaded"));
     }
@@ -114,7 +113,6 @@ public class VideoController {
         if(comment == null)
             return ResponseEntity.badRequest().body(new MessageResponse("Error: Comment invalid"));
 
-        System.out.println(comment);
         videoService.addComment(comment);
 
         return ResponseEntity.ok(new MessageResponse("Comment successfully added"));
