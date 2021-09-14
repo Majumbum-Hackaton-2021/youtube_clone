@@ -10,7 +10,6 @@
     </div>
 
     <div class="header__icons">
-      <i class="material-icons display-this">search</i>
       <router-link to="/upload">
         <i class="material-icons" v-if="isLoggedIn && isModerator">videocam</i>
       </router-link>
