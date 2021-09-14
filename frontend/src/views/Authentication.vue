@@ -122,6 +122,10 @@ export default {
 </script>
 
 <style scoped>
+
+.button span{
+  color: white;
+}
 .form-row {
   display: flex;
   margin: 16px 0px;
