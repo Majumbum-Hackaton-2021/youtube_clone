@@ -46,7 +46,7 @@
         </div>
 
         <div class="comment_btn_wrapper">
-          <button class="btn btn-info" :class="{'button--disabled' : !validatedFields}" @click="addComment">Comment</button>
+          <button class="btn btn-info" :class="{'button--disabled' : !validatedFields}" @click="addComment" :disabled="!validatedFields">Comment</button>
         </div>
       </div>
 
