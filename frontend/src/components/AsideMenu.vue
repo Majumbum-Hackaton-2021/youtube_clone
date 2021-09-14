@@ -18,10 +18,12 @@
     </div>
     <hr />
     <div class="sidebar__categories">
-      <div class="sidebar__category">
-        <i class="material-icons">library_add_check</i>
-        <span>Library</span>
-      </div>
+      <router-link to="/savedVideo" v-if="isLoggedIn">
+        <div class="sidebar__category" >
+          <i class="material-icons">library_add_check</i>
+          <span>Saved Video</span>
+        </div>
+      </router-link>
       <div class="sidebar__category">
         <i class="material-icons">history</i>
         <span>History</span>
@@ -45,7 +47,12 @@
 
 <script>
 export default {
-  name: "AsideMenu"
+  name: "AsideMenu",
+  computed: {
+    isLoggedIn: function () {
+      return this.$store.state.user.id !== -1
+    },
+  }
 }
 </script>
 

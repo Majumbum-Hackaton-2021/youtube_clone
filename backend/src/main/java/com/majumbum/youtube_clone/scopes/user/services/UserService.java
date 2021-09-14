@@ -153,5 +153,4 @@ public class UserService {
             updatePassword(editForm.newPassword,user.get());
         }
     }
-
 }

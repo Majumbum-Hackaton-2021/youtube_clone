@@ -66,8 +66,11 @@ public class User implements UserDetails , Serializable {
 
 
     @Column
-    // Private Key
     private String validationToken;
+
+    @Column
+    @ElementCollection
+    private Set<Long> savedVideoId = new HashSet<>();
 
     @SuppressWarnings("unused")
     public User(){};
@@ -211,6 +214,24 @@ public class User implements UserDetails , Serializable {
 
     public void setGender(Gender gender) {
         this.gender = gender;
+    }
+
+    public Set<Long> getSavedVideoId() {
+        return savedVideoId;
+    }
+
+    public void setSavedVideoId(Set<Long> savedVideoId) {
+        this.savedVideoId = savedVideoId;
+    }
+
+    public void addVideoId(Long id){
+        if(!savedVideoId.contains(id))
+            this.savedVideoId.add(id);
+    }
+
+    public void removeVideoId(Long id){
+        if(savedVideoId.contains(id))
+            this.savedVideoId.remove(id);
     }
 
     @Override

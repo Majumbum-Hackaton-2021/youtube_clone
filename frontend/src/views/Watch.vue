@@ -19,7 +19,7 @@
             <span class="likes-counter">{{likes}}</span>
           </div>
 
-          <div class="share-section">
+          <div class="share-section" style="transition: 0.5s" id="saved" @click="saveVideo" v-if="isLoggedIn">
             <i class="fas fa-plus"></i>
             <span>Save</span>
           </div>
@@ -126,6 +126,14 @@ export default {
   },
 
   methods: {
+    saveVideo(){
+      axios.get('http://localhost:8090/videos/saveVideo?videoId='+this.id+'&userId='+this.$store.state.userInfos.id).then((response) => {
+        console.log(response)
+        document.getElementById('saved').classList.add("saved")
+      }).catch((error) =>{
+        console.log(error)
+      })
+    },
     isMyComment(comment){
       return this.$store.state.userInfos.nickname === comment.authorName
     },
@@ -185,9 +193,21 @@ export default {
 </script>
 
 <style scoped>
+
+#like_btn{
+  cursor: pointer;
+}
 /deep/
 .liked{
   color: #2196F3;
+}
+
+/deep/
+.saved{
+  color: #20e841;
+}
+.saved span{
+  color: #20e841;
 }
 
 .close{
@@ -292,6 +312,7 @@ export default {
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  cursor: pointer;
 }
 
 .share-section i {

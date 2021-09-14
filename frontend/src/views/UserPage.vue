@@ -129,8 +129,10 @@ export default {
   },
   methods:{
     logout(){
-      this.$store.commit('logout');
-      this.$router.push("/");
+      let that = this
+      this.$store.commit('logout').then(()=>{
+        that.$router.push("/");
+      })
     },
     switchToProfile() {
       this.mode = 'profile'

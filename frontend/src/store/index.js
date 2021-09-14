@@ -27,10 +27,9 @@ const store = createStore({
     user: user,
     userInfos:{},
     users: [],
-    article: {},
-    articles: [],
     videos: {},
     video: {},
+    savedVideos: [],
   },
   mutations: {
     setStatus: (state , status) => {
@@ -64,10 +63,16 @@ const store = createStore({
       state.users = users
     },
     logout: (state) =>{
+      state.status = ''
       state.user = {
         id: -1,
         token: '',
       }
+      state.userInfos = {}
+      state.users= []
+      state.videos = []
+      state.video = {}
+      state.savedVideos = []
       localStorage.removeItem('user');
     },
     fetchVideos: (state, videos) =>{
@@ -75,6 +80,9 @@ const store = createStore({
     },
     fetchVideo: (state, video)=>{
       state.video = video
+    },
+    fetchSavedVideos: (state, videos)=>{
+      state.savedVideos = videos
     },
   },
   actions: {
@@ -189,6 +197,18 @@ const store = createStore({
       return new Promise( (resolve , reject) => {
         instance.get('/videos/unique?id='+videoId).then((response) => {
           commit("fetchVideo", response.data)
+          resolve(response)
+        }).catch((error) =>{
+          commit('setStatus' , 'edit-error')
+          reject(error)
+        })
+      })
+    },
+    fetchSavedVideos:({commit} , userId) => {
+      return new Promise( (resolve , reject) => {
+        instance.get('/videos/savedVideos?userId='+ userId).then((response) => {
+          commit("fetchSavedVideos", response.data)
+          console.log(response.data)
           resolve(response)
         }).catch((error) =>{
           commit('setStatus' , 'edit-error')

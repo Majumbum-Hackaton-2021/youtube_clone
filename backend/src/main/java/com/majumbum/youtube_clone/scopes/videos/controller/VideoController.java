@@ -140,4 +140,35 @@ public class VideoController {
         return ResponseEntity.ok(video.get());
     }
 
+    @GetMapping("/saveVideo")
+    public ResponseEntity<?> SaveVideo(@RequestParam("videoId") Optional<Long> videoId , @RequestParam("userId") Optional<Long> userId){
+        if(videoId.isEmpty())
+            return ResponseEntity.ok(new MessageResponse("videoId param is needed"));
+
+        if(userId.isEmpty())
+            return ResponseEntity.ok(new MessageResponse("userId param is needed"));
+
+        videoService.addSavedVideo(videoId.get(), userId.get());
+        return ResponseEntity.ok(new MessageResponse("Video is saved"));
+    }
+
+    @GetMapping("/removeSavedVideo")
+    public ResponseEntity<?> removeSavedVideo(@RequestParam("videoId") Optional<Long> videoId , @RequestParam("userId") Optional<Long> userId){
+        if(videoId.isEmpty())
+            return ResponseEntity.ok(new MessageResponse("videoId param is needed"));
+
+        if(userId.isEmpty())
+            return ResponseEntity.ok(new MessageResponse("userId param is needed"));
+
+        videoService.removeSavedVideo(videoId.get(), userId.get());
+        return ResponseEntity.ok(new MessageResponse("Video is removed"));
+    }
+
+    @GetMapping("/savedVideos")
+    public ResponseEntity<?> savedVideo(@RequestParam("userId") Optional<Long> userId){
+        if(userId.isEmpty())
+            return ResponseEntity.ok(new MessageResponse("userId param is needed"));
+
+        return ResponseEntity.ok(videoService.getSavedVideosFromUser(userId.get()));
+    }
 }

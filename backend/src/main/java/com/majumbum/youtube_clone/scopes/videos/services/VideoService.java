@@ -1,5 +1,7 @@
 package com.majumbum.youtube_clone.scopes.videos.services;
 
+import com.majumbum.youtube_clone.scopes.user.entities.User;
+import com.majumbum.youtube_clone.scopes.user.repositories.UserRepository;
 import com.majumbum.youtube_clone.scopes.videos.entities.Comment;
 import com.majumbum.youtube_clone.scopes.videos.entities.Video;
 import com.majumbum.youtube_clone.scopes.videos.repository.CommentRepository;
@@ -8,9 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class VideoService {
@@ -20,6 +20,9 @@ public class VideoService {
 
     @Autowired
     private CommentRepository commentRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
     public void saveVideo(Video video){
         if(video == null) throw new NullPointerException("Video must no be null");
@@ -122,5 +125,33 @@ public class VideoService {
 
         video.get().setViews(video.get().getViews()+ 1);
         saveVideo(video.get());
+    }
+
+    public void addSavedVideo(Long videoId, Long userId){
+        Optional<User> user = userRepository.findById(userId);
+        if(user.isEmpty()) throw new NullPointerException("The user with this Id doesn't exist");
+        user.get().addVideoId(videoId);
+        userRepository.save(user.get());
+    }
+
+    public void removeSavedVideo(Long videoId, Long userId){
+        Optional<User> user = userRepository.findById(userId);
+        if(user.isEmpty()) throw new NullPointerException("The user with this Id doesn't exist");
+        user.get().removeVideoId(videoId);
+        userRepository.save(user.get());
+    }
+
+    public Set<Video> getSavedVideosFromUser(Long userId){
+        Optional<User> user = userRepository.findById(userId);
+        if(user.isEmpty()) throw new NullPointerException("The user with this Id doesn't exist");
+
+        Set<Video> videos = new HashSet<>();
+        for(Long id : user.get().getSavedVideoId()){
+            Optional<Video> video = getVideoById(id);
+            if(video.isEmpty()) throw new NullPointerException("Video is not in database");
+
+            videos.add(video.get());
+        }
+        return videos;
     }
 }
