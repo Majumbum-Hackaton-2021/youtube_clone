@@ -69,4 +69,4 @@ with "YoutubeCloneApplication.java" as main class (The api will start on port 80
 === App Sample
 
 
-image:clone.png?raw=true[1]
+image:clone.jpg?raw=true[1]
