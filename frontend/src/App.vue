@@ -13,6 +13,7 @@
 
 body {
   font-family: 'Roboto', sans-serif;
+  overflow-y: scroll;
 }
 
 .material-icons {
@@ -70,14 +71,12 @@ body {
 .mainBody {
   height: calc(100vh - 70px);
   display: flex;
-  overflow: hidden;
 }
 
 .sidebar {
   height: 100%;
   min-width: 190px;
   background-color: white;
-  overflow-y: scroll;
 }
 
 .sidebar__categories {
@@ -120,32 +119,9 @@ hr {
   height: 100%;
   padding: 15px 15px;
   border-top: 1px solid #ddd;
-  overflow-y: scroll;
 }
 
-.videos__container {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  overflow-y: scroll;
-}
 
-.video {
-  width: 310px;
-  margin-bottom: 30px;
-}
-
-.video__thumbnail {
-  width: 100%;
-  height: 170px;
-}
-
-.video__thumbnail img {
-  object-fit: cover;
-  height: 100%;
-  width: 100%;
-}
 
 .author img {
   object-fit: cover;

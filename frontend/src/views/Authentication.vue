@@ -3,7 +3,6 @@
    <div class="card">
      <h1 class="card__title" v-if="mode === 'login'">Login</h1>
      <h1 class="card__title" v-else>Register</h1>
-
      <p class="card__subtitle" v-if="mode === 'login'">Don't you have an account yet?
        <span class="card__action" @click="switchToCreateAccount()">Create an account</span></p>
      <p class="card__subtitle" v-else>Do you already have an account?
@@ -12,24 +11,28 @@
      <div class="form-row">
            <button class="icon"><i class="fa fa-envelope" aria-hidden="true"></i></button><input v-model="email" class="form-row__input" type="email" placeholder="Email"/>
      </div>
+     
      <div class="form-row" v-if="mode === 'register'">
-         <button class="icon"><i class="fa fa-user" aria-hidden="true"></i></button><input v-model="firstname" class="form-row__input" type="text" placeholder="firstname"/>
+        <button class="icon"><i class="fa fa-user" aria-hidden="true"></i></button>
+        <input v-model="firstname" class="form-row__input" type="text" placeholder="firstname"/>
 
-        <button class="icon"><i class="fas fa-user"></i></button><input v-model="lastname" class="form-row__input" type="text" placeholder="lastname"/>
+        <button class="icon"><i class="fas fa-user"></i></button>
+        <input v-model="lastname" class="form-row__input" type="text" placeholder="lastname"/>
 
-        <button class="icon"><i class="fa fa-user" aria-hidden="true"></i></button><input v-model="nickname" class="form-row__input" type="text" placeholder="nickname"/>
+        <button class="icon"><i class="fa fa-user" aria-hidden="true"></i></button>
+        <input v-model="nickname" class="form-row__input" type="text" placeholder="nickname"/>
 
-        <button class="icon"><i class="fas fa-venus-mars"></i></button><select   v-model="gender" class="form-row__input1">
-            <option  value="" disabled selected hidden>gender</option>     
-             <option value="female">female</option>
-              <option value="male">male</option>
-         </select>
+        <button class="icon"><i class="fas fa-venus-mars"></i></button>
+        <select v-model="gender" class="form-row__input1" multiple> 
+          <option value="female">female</option>
+          <option value="male">male</option>
+        </select>
+        <p>current : {{ gender }}</p>
      </div>
      <div class="form-row">
         <button class="icon"><i class="fa fa-key" aria-hidden="true"></i></button><input v-model="password" class="form-row__input" type="password" placeholder="password"/>
      </div>
      <hr>
-
      <div class="form-row error" v-if="mode === 'login' && updateStatus === 'error_login'">
        Invalid email address and/or password
      </div>
