@@ -22,12 +22,12 @@
         <button class="icon"><i class="fa fa-user" aria-hidden="true"></i></button>
         <input v-model="nickname" class="form-row__input" type="text" placeholder="nickname"/>
 
-        <button class="icon"><i class="fas fa-venus-mars"></i></button>
-        <select v-model="gender" class="form-row__input1" multiple> 
-          <option value="female">female</option>
-          <option value="male">male</option>
-        </select>
-        <p>current : {{ gender }}</p>
+       <button class="icon"><i class="fas fa-venus-mars"></i></button>
+       <select v-model="gender" class="form-row__input1">
+       <option value="" disabled selected hidden>gender</option>
+       <option value="female">female</option>
+       <option value="male">male</option>
+     </select>
      </div>
      <div class="form-row">
         <button class="icon"><i class="fa fa-key" aria-hidden="true"></i></button><input v-model="password" class="form-row__input" type="password" placeholder="password"/>
@@ -41,11 +41,11 @@
      </div>
 
      <div class="form-row">
-       <button class="button" @click="login" :class="{'button--disabled' : !validatedFields}" v-if="mode === 'login'">
+       <button class="button auth-btn" @click="login" :class="{'button--disabled' : !validatedFields}" v-if="mode === 'login'">
          <span v-if="updateStatus === 'loading'">Connection in progress...</span>
          <span v-else>Login</span>
        </button>
-       <button class="button" @click="createAccount" :class="{'button--disabled' : !validatedFields}" v-else>
+       <button class="button auth-btn" @click="createAccount" :class="{'button--disabled' : !validatedFields}" v-else>
          <span v-if="updateStatus === 'loading'">Creation in progress...</span>
          <span v-else>Register</span>
        </button>
@@ -131,6 +131,9 @@ export default {
   font-size: 20px;
 }
 
+.auth-btn{
+  background: #FF0000;
+}
 
 .form-row__input
 {
@@ -152,8 +155,6 @@ select{
   padding-left: 6px;
 
 }
-
-
 .error
 {
   color: red;
@@ -216,21 +217,10 @@ select{
   text-decoration: underline;
 }
 
-.button:hover {
-  cursor:pointer;
-  box-shadow: inset -16.5rem 0 0 0 #ff0000a8, inset 16.5rem 0 0 0 #ff0000;
-  transition: 0.8s;
-}
-
 .button--disabled {
-  background:#FF0000;
   color:#ececec;
   font-size:14px;
-}
-
-.button--disabled:hover {
-  cursor:pointer;
-  background:#ff0000a8;
+  background: #aaaaaa !important;
 }
 
 input{
@@ -244,13 +234,13 @@ input{
 }
 
 .form-row__input1{
-  
   width:90%;
   border-top-right-radius: 20px;
   border-bottom-right-radius:20px;
   border:none;
   background:#f2f2f2;
-   margin: 8px 0px;
+  margin: 8px 0px;
+  height: 40px;
 }
 
 .form-row__input1:focus{

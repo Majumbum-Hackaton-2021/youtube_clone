@@ -7,16 +7,7 @@
           <span>Home</span>
         </div>
       </router-link>
-      <div class="sidebar__category">
-        <i class="material-icons">local_fire_department</i>
-        <span>Trending</span>
-      </div>
-      <div class="sidebar__category">
-        <i class="material-icons">subscriptions</i>
-        <span>Subcriptions</span>
-      </div>
     </div>
-    <hr />
     <div class="sidebar__categories">
       <router-link to="/savedVideo" v-if="isLoggedIn">
         <div class="sidebar__category" >
@@ -24,24 +15,7 @@
           <span>Saved Video</span>
         </div>
       </router-link>
-      <div class="sidebar__category">
-        <i class="material-icons">history</i>
-        <span>History</span>
-      </div>
-      <div class="sidebar__category">
-        <i class="material-icons">play_arrow</i>
-        <span>Your Videos</span>
-      </div>
-      <div class="sidebar__category">
-        <i class="material-icons">watch_later</i>
-        <span>Watch Later</span>
-      </div>
-      <div class="sidebar__category">
-        <i class="material-icons">thumb_up</i>
-        <span>Liked Videos</span>
-      </div>
     </div>
-    <hr />
   </div>
 </template>
 
