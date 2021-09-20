@@ -3,32 +3,36 @@
    <div class="card">
      <h1 class="card__title" v-if="mode === 'login'">Login</h1>
      <h1 class="card__title" v-else>Register</h1>
-
      <p class="card__subtitle" v-if="mode === 'login'">Don't you have an account yet?
        <span class="card__action" @click="switchToCreateAccount()">Create an account</span></p>
      <p class="card__subtitle" v-else>Do you already have an account?
        <span class="card__action" @click="switchToLogin()">Login</span></p>
 
      <div class="form-row">
-       <input v-model="email" class="form-row__input" type="email" placeholder="Email"/>
+           <button class="icon"><i class="fa fa-envelope" aria-hidden="true"></i></button><input v-model="email" class="form-row__input" type="email" placeholder="Email"/>
      </div>
+     
      <div class="form-row" v-if="mode === 'register'">
-       <input v-model="firstname" class="form-row__input" type="text" placeholder="firstname"/>
-       <input v-model="lastname" class="form-row__input" type="text" placeholder="lastname"/>
-       <input v-model="nickname" class="form-row__input" type="text" placeholder="nickname"/>
+        <button class="icon"><i class="fa fa-user" aria-hidden="true"></i></button>
+        <input v-model="firstname" class="form-row__input" type="text" placeholder="firstname"/>
 
-       <select v-model="gender" multiple>
-         <option>male</option>
-         <option>female</option>
-       </select>
-       <p>current : {{ gender }}</p>
+        <button class="icon"><i class="fas fa-user"></i></button>
+        <input v-model="lastname" class="form-row__input" type="text" placeholder="lastname"/>
 
+        <button class="icon"><i class="fa fa-user" aria-hidden="true"></i></button>
+        <input v-model="nickname" class="form-row__input" type="text" placeholder="nickname"/>
+
+        <button class="icon"><i class="fas fa-venus-mars"></i></button>
+        <select v-model="gender" class="form-row__input1" multiple> 
+          <option value="female">female</option>
+          <option value="male">male</option>
+        </select>
+        <p>current : {{ gender }}</p>
      </div>
-
      <div class="form-row">
-       <input v-model="password" class="form-row__input" type="password" placeholder="password"/>
+        <button class="icon"><i class="fa fa-key" aria-hidden="true"></i></button><input v-model="password" class="form-row__input" type="password" placeholder="password"/>
      </div>
-
+     <hr>
      <div class="form-row error" v-if="mode === 'login' && updateStatus === 'error_login'">
        Invalid email address and/or password
      </div>
@@ -122,54 +126,75 @@ export default {
 </script>
 
 <style scoped>
-
 .button span{
   color: white;
+  font-size: 20px;
 }
-.form-row {
-  display: flex;
-  margin: 16px 0px;
-  gap:16px;
-  flex-wrap: wrap;
-}
-.form-row__input {
+
+
+.form-row__input
+{
   padding:8px;
   border: none;
-  border-radius: 8px;
   background:#f2f2f2;
   font-weight: 500;
   font-size: 16px;
-  flex:1;
   min-width: 100px;
-  color: black;
 }
-.form-row__input::placeholder {
+
+.form-row__input::placeholder 
+{
   color:#aaaaaa;
+  padding-left: 4px;
 }
-.error{
+
+select{
+  padding-left: 6px;
+
+}
+
+
+.error
+{
   color: red;
 }
+
 .card {
+  border: 1px solid #fafafa;
   position: relative;
   left: 50%;
+  bottom: 10%;
   transform: translate(-50%, 10%);
   max-width: 100%;
-  width: 540px;
-  background:white;
+  width: 580px;
   border-radius: 16px;
   padding:32px;
+  box-shadow: 0px 2px 8px rgba(0,0,0,0.1);
+  background-color: #fafafa;
+   
 }
+
 .card__title {
   text-align:center;
-  font-weight: 800;
+  font-weight: bold;
+  font-size:40px;
 }
+
 .card__subtitle {
   text-align: center;
   color:#666;
-  font-weight: 500;
+  margin-bottom:15px;
 }
+
+ hr
+{
+  color:solid gainsboro ;
+  margin-bottom:10px;
+  margin-top:10px;
+}
+
 .button {
-  background: #2196F3;
+  outline: none;
   color:white;
   border-radius: 8px;
   font-weight: 800;
@@ -177,25 +202,86 @@ export default {
   border: none;
   width: 100%;
   padding: 16px;
-  transition: .4s background-color;
+  transition: .4s 
 }
-.card__action {
+
+.card__action 
+{
   color:#2196F3;
-  text-decoration: underline;
 }
+
+
 .card__action:hover {
   cursor:pointer;
+  text-decoration: underline;
 }
+
 .button:hover {
   cursor:pointer;
-  background: #1976D2;
+  box-shadow: inset -16.5rem 0 0 0 #ff0000a8, inset 16.5rem 0 0 0 #ff0000;
+  transition: 0.8s;
 }
+
 .button--disabled {
-  background:#cecece;
-  color:#ececec
+  background:#FF0000;
+  color:#ececec;
+  font-size:14px;
 }
+
 .button--disabled:hover {
-  cursor:not-allowed;
-  background:#cecece;
+  cursor:pointer;
+  background:#ff0000a8;
 }
+
+input{
+  height: 36px;
+  width:90%;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius:20px;
+  border:none;
+  margin: 8px 0px;
+
+}
+
+.form-row__input1{
+  
+  width:90%;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius:20px;
+  border:none;
+  background:#f2f2f2;
+   margin: 8px 0px;
+}
+
+.form-row__input1:focus{
+  outline-color:#FF0000;
+
+}
+
+input:focus{
+  outline-color:#FF0000;
+}
+
+.icon 
+{
+ outline: none;
+ font-weight: 500;
+ font-size: 16px;
+ height: 36px;
+ width: 10%;
+ border:none;
+ color:#f2f2f2;
+ border-top-left-radius:20px;
+ border-bottom-left-radius:20px;
+ margin: 8px 0px;
+ background-color:#aaaaaa;
+}
+
+.icon:hover
+{
+ background-color:#aaaaaa70;
+}
+
+
+
 </style>
