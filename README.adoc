@@ -7,6 +7,8 @@ https://t.me/lescodeursnelagerpas[#lescodeursnelagerpas]
 we chose to clone some features of youtube. In the document below we will
 list the different features that will be implemented in the application.
 
+=== DIFFERENT FEATURES
+
 The clone To develop the application we will use VueJS for the frontend and Spring Boot
 for the backend. The application will have the following features:
 
