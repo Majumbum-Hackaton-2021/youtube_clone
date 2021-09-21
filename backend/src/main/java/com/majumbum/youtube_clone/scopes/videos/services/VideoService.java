@@ -107,14 +107,33 @@ public class VideoService {
         }
     }
 
-    public void updateLikes(Long videoId) {
+    public void updateLikes(Long videoId , Long userId) {
         if(videoId == null) throw new NullPointerException("VideoID should not be null");
-
         Optional<Video> video = getVideoById(videoId);
         if(video.isEmpty()) throw new NullPointerException("Video is not in database");
 
         video.get().setLikes(video.get().getLikes()+ 1);
+        video.get().addUserWhoLiked(userId);
         saveVideo(video.get());
+    }
+
+
+    public void removeLikes(Long videoId , Long userId) {
+        if(videoId == null) throw new NullPointerException("VideoID should not be null");
+        Optional<Video> video = getVideoById(videoId);
+        if(video.isEmpty()) throw new NullPointerException("Video is not in database");
+
+        video.get().setLikes(video.get().getLikes() - 1);
+        video.get().removeUserWhoLiked(userId);
+        saveVideo(video.get());
+    }
+
+    public boolean isLiked(Long videoId , Long userId){
+        if(videoId == null) throw new NullPointerException("VideoID should not be null");
+        Optional<Video> video = getVideoById(videoId);
+        if(video.isEmpty()) throw new NullPointerException("Video is not in database");
+
+        return video.get().getUsersWhoLiked().contains(userId);
     }
 
     public void updateViews(Long videoId) {

@@ -14,8 +14,8 @@
         <h4 class="view-counter">{{video.views}} Views</h4>
 
         <div class="video-info-right">
-          <div class="likes-section">
-            <i class="material-icons" id="like_btn" @click="updateLike('like_btn')">thumb_up</i>
+          <div class="likes-section"  v-if="isLoggedIn">
+            <i class="material-icons" :class="liked ? 'liked' : ''" id="like_btn" @click="updateLike()">thumb_up</i>
             <span class="likes-counter">{{likes}}</span>
           </div>
 
@@ -89,7 +89,8 @@ export default {
     link : String,
     commentsNumber: Number,
     likes :0,
-    comment : ''
+    comment : '',
+    liked : Boolean
   }),
 
   computed:{
@@ -102,6 +103,9 @@ export default {
     isModerator: function () {
       return this.$store.state.userInfos.moderator === true
     },
+    isLiked:function (){
+      return this.liked
+    }
   },
   mounted() {
     let that = this
@@ -123,7 +127,14 @@ export default {
     }).catch((error) =>{
       console.log(error)
     })
-  },
+
+    // if loggedin
+    if(this.$store.state.user.id !== -1){
+      axios.get('http://localhost:8090/videos/isLiked?id='+this.id+'&userId='+this.$store.state.userInfos.id).then((response) => {
+        that.liked = response.data
+      })
+    }
+   },
 
   methods: {
     saveVideo(){
@@ -137,8 +148,28 @@ export default {
     isMyComment(comment){
       return this.$store.state.userInfos.nickname === comment.authorName
     },
-    updateLike(like_btn){
-      axios.get('http://localhost:8090/videos/like?id='+this.id).then((response) => {
+    updateLike(){
+      axios.get('http://localhost:8090/videos/isLiked?id='+this.id+'&userId='+this.$store.state.userInfos.id).then((response) => {
+        if(!response.data){
+          axios.get('http://localhost:8090/videos/like?id='+this.id+'&userId='+this.$store.state.userInfos.id).then((response) => {
+            console.log(response)
+          }).catch((error) =>{
+            console.log(error)
+          })
+          this.likes ++
+          this.liked = true
+        }else{
+          axios.get('http://localhost:8090/videos/removeLike?id='+this.id+'&userId='+this.$store.state.userInfos.id).then((response) => {
+            console.log(response)
+          }).catch((error) =>{
+            console.log(error)
+          })
+          this.likes --
+          this.liked = false
+        }
+      })
+      /*
+      axios.get('http://localhost:8090/videos/like?id='+this.id+'&userId='+this.$store.state.userInfos.id).then((response) => {
         console.log(response)
       }).catch((error) =>{
         console.log(error)
@@ -146,6 +177,8 @@ export default {
       let elem = document.getElementById(like_btn)
       elem.classList.add("liked")
       this.likes ++
+
+       */
     },
     addComment(){
       let that = this

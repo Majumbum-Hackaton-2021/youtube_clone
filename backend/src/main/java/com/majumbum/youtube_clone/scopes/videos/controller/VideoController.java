@@ -54,11 +54,38 @@ public class VideoController {
     }
 
     @GetMapping("/like")
-    public ResponseEntity<?> addLike(@RequestParam("id") Optional<Long> videoId){
+    public ResponseEntity<?> addLike(@RequestParam("id") Optional<Long> videoId , @RequestParam("userId") Optional<Long> userId){
         if(videoId.isEmpty())
             return ResponseEntity.ok(new MessageResponse("id param is needed"));
 
-        videoService.updateLikes(videoId.get());
+        if(userId.isEmpty())
+            return ResponseEntity.ok(new MessageResponse("userId param is needed"));
+
+        videoService.updateLikes(videoId.get(), userId.get());
+        return ResponseEntity.ok(new MessageResponse("Video up to date"));
+    }
+
+
+    @GetMapping("/isLiked")
+    public ResponseEntity<?> isLiked(@RequestParam("id") Optional<Long> videoId , @RequestParam("userId") Optional<Long> userId){
+        if(videoId.isEmpty())
+            return ResponseEntity.ok(new MessageResponse("id param is needed"));
+
+        if(userId.isEmpty())
+            return ResponseEntity.ok(new MessageResponse("userId param is needed"));
+
+        return ResponseEntity.ok(videoService.isLiked(videoId.get(),userId.get()));
+    }
+    
+    @GetMapping("/removeLike")
+    public ResponseEntity<?> removeLike(@RequestParam("id") Optional<Long> videoId , @RequestParam("userId") Optional<Long> userId){
+        if(videoId.isEmpty())
+            return ResponseEntity.ok(new MessageResponse("id param is needed"));
+
+        if(userId.isEmpty())
+            return ResponseEntity.ok(new MessageResponse("userId param is needed"));
+
+        videoService.removeLikes(videoId.get(), userId.get());
         return ResponseEntity.ok(new MessageResponse("Video up to date"));
     }
 

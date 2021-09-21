@@ -9,8 +9,10 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Video {
@@ -76,6 +78,10 @@ public class Video {
     @NotEmpty
     @NotNull
     private String videoLink;
+
+    @Column
+    @ElementCollection
+    private Set<Long> usersWhoLiked = new HashSet<>();
 
     @SuppressWarnings("unused")
     public Video() {
@@ -177,6 +183,24 @@ public class Video {
 
     public void setVideoLink(String videoLink) {
         this.videoLink = videoLink;
+    }
+
+    public Set<Long> getUsersWhoLiked() {
+        return usersWhoLiked;
+    }
+
+    public void setUsersWhoLiked(Set<Long> usersWhoLiked) {
+        this.usersWhoLiked = usersWhoLiked;
+    }
+
+    public void addUserWhoLiked(Long id){
+        if(!usersWhoLiked.contains(id))
+            this.usersWhoLiked.add(id);
+    }
+
+    public void removeUserWhoLiked(Long id){
+        if(usersWhoLiked.contains(id))
+            this.usersWhoLiked.remove(id);
     }
 
     @Override
