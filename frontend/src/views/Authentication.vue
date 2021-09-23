@@ -9,7 +9,7 @@
        <span class="card__action" @click="switchToLogin()">Login</span></p>
 
      <div class="form-row">
-           <button class="icon"><i class="fa fa-envelope" aria-hidden="true"></i></button><input v-model="email" class="form-row__input" type="email" placeholder="Email"/>
+           <button class="icon"><i class="fa fa-envelope" aria-hidden="true"></i></button><input v-model="email" class="form-row__input" type="email" placeholder="E-mail"/>
      </div>
      
      <div class="form-row" v-if="mode === 'register'">
@@ -190,8 +190,8 @@ select{
  hr
 {
   color:solid gainsboro ;
-  margin-bottom:10px;
-  margin-top:10px;
+  margin-bottom:15px;
+  margin-top:15px;
 }
 
 .button {

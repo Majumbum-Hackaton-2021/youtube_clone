@@ -59,11 +59,11 @@
                   <h6 class="mb-0">Gender</h6>
                 </div>
                 <div class="col-sm-9 text-secondary">
-                  <select v-model="gender" name="gender" multiple>
-                    <option>male</option>
-                    <option>female</option>
-                  </select>
-                  <p>current : {{ gender }}</p>
+                   <select class="form-control form-row__input" v-model="gender" name="gender">
+                          <option value="" disabled selected hidden>gender</option>
+                          <option value="female">female</option>
+                          <option value="male">male</option>
+                    </select>
                 </div>
               </div>
               <hr>
@@ -208,6 +208,10 @@ export default {
   background-clip: border-box;
   border: 0 solid rgba(0,0,0,.125);
   border-radius: .25rem;
+}
+select{
+  width:100%;
+  height: 40px;
 }
 
 .card-body {

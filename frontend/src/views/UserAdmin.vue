@@ -1,6 +1,6 @@
 <template>
 <Header/>
-  <h1 class="title">Users</h1>
+  <h1 class="title">Users and functions</h1>
   <div class="wrapper" v-for="(user,index) in allUsers" :key="index" >
     <div class="card">
       <span class="fas fa-window-close close" v-if="user.id !== userInfos.id" @click="deleteUser(user.id)"></span>
@@ -59,6 +59,7 @@ export default {
 <style scoped>
 .title{
   text-align: center;
+  font-weight: bold;
 }
 .wrapper{
   position: relative;
@@ -88,6 +89,7 @@ p{
   padding:20px;
   left: 50%;
   transform: translateX(-50%);
+  box-shadow: 0px 2px 8px rgba(0,0,0,0.1);
 }
 .card__title {
   text-align:center;
