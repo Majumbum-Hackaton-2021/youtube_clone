@@ -39,7 +39,7 @@
       <h5 style="font-weight: normal">{{commentsNumber}} Comments</h5>
 
 
-      <div style="display: flex" v-if="isLoggedIn">
+      <div class="opinion" style="display: flex" v-if="isLoggedIn">
         <div class="form__group field">
           <input type="text" class="form__field" placeholder="Your Comment" name="comment" id='comment' v-model="comment" required />
           <label for="comment" class="form__label">Comment</label>
@@ -536,7 +536,7 @@ export default {
 }
 
 .text-container{
-  width: 100%;
+  width: 90%;
   position: relative;
 }
 

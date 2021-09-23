@@ -13,7 +13,7 @@
                   <h6 class="mb-0">Title</h6>
                 </div>
                 <div class="col-sm-9 text-secondary">
-                  <input type="text" class="form-control form-row__input" name="title"  v-model="title" />
+                  <input type="text"  placeholder="what is your video's titel?" class="form-control form-row__input" name="title"  v-model="title" />
                 </div>
               </div>
               <hr>
@@ -22,7 +22,7 @@
                   <h6 class="mb-0">Description</h6>
                 </div>
                 <div class="col-sm-9 text-secondary">
-                  <textarea  class="form-control form-row__input" name="description"  v-model="description">
+                  <textarea placeholder="Give a description to your video" class="form-control form-row__input" name="description"  v-model="description">
                   </textarea>
                 </div>
               </div>
@@ -140,7 +140,7 @@ export default {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  box-shadow: 0 1px 3px 0 rgba(0,0,0,.1), 0 1px 2px 0 rgba(0,0,0,.06);
+  box-shadow: 0px 2px 8px rgba(0,0,0,0.1);
   display: flex;
   flex-direction: column;
   min-width: 0;
@@ -156,6 +156,14 @@ export default {
   min-height: 1px;
   padding: 1rem;
 }
+
+
+.form-row__input::placeholder 
+{
+  color:#aaaaaa;
+  padding-left: 4px;
+}
+
 
 .gutters-sm {
   margin-right: -8px;
@@ -180,13 +188,30 @@ export default {
   box-shadow: none!important;
 }
 
-.button--disabled{
-  cursor: not-allowed;
-  background: #cecece;
-}
+
 .title{
   text-align: center;
   font-size: 32px;
   font-weight: 500;
+}
+
+.form-control {
+    display: block;
+    width: 100%;
+    padding: revert;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 2;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    }
+ 
+.button--disabled {
+  color:#ececec;
+  font-size:14px;
+  background: #aaaaaa !important;
 }
 </style>
