@@ -76,7 +76,7 @@ public class VideoController {
 
         return ResponseEntity.ok(videoService.isLiked(videoId.get(),userId.get()));
     }
-    
+
     @GetMapping("/removeLike")
     public ResponseEntity<?> removeLike(@RequestParam("id") Optional<Long> videoId , @RequestParam("userId") Optional<Long> userId){
         if(videoId.isEmpty())

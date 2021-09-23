@@ -41,7 +41,7 @@ public class Initializer {
                     testUser.password , testUser.grantedAuthorities , testUser.gender);
 
             if(user.getEmail().equals("admin@mail.com"))
-                user.setImage("https://avatars.dicebear.com/api/male/302.svg");
+                user.setImage("https://avatars.dicebear.com/api/avataaars/male/1.svg");
 
             userService.generateAndSaveNewValidationTokenForUser(user);
             userService.rehashPassword(testUser.password , user);

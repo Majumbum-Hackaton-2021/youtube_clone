@@ -83,7 +83,7 @@ public class User implements UserDetails , Serializable {
         this.hashedPassword = password;
         this.grantedAuthorities = grantedAuthorities;
         this.gender = gender;
-        this.image = "https://avatars.dicebear.com/api/"+gender.toString()+"/"+ (int)((Math.random() * 500) + 1) +".svg";
+        this.image = "https://avatars.dicebear.com/api/avataaars/"+gender.toString()+"/"+ (int)((Math.random() * 500) + 1) +".svg";
     }
     
     public long getId() {
