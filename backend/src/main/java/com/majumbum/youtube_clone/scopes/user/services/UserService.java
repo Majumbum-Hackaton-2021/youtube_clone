@@ -149,7 +149,13 @@ public class UserService {
             user.get().setFirstname(editForm.firstname);
             user.get().setLastname(editForm.lastname);
             user.get().setNickname(editForm.nickname);
-            user.get().setGender(editForm.gender);
+            Gender gender;
+            if(editForm.gender.equals(Gender.female.toString()))
+                gender = Gender.female;
+            else
+                gender = Gender.male;
+
+            user.get().setGender(gender);
             updatePassword(editForm.newPassword,user.get());
         }
     }

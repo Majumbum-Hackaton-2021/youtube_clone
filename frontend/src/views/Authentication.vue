@@ -100,7 +100,7 @@ export default {
         firstname : this.firstname,
         lastname : this.lastname,
         nickname : this.nickname,
-        gender : this.gender[0],
+        gender : this.gender,
         password : this.password
       }).then( (response) => {
         console.log(response)

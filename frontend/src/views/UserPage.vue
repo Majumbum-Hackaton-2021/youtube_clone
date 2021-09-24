@@ -139,13 +139,15 @@ export default {
       this.mode = 'edit'
     },
     editProfile(){
+
+      console.log(this.gender[0])
       if(this.validatedFields){
         this.$store.dispatch('editProfile' , {
           id : this.userInfos.id,
           firstname : this.firstname,
           lastname : this.lastname,
           nickname : this.nickname,
-          gender : this.gender[0],
+          gender : this.gender,
           password : this.password,
           newPassword : this.newPassword
         }).then( (response) => {

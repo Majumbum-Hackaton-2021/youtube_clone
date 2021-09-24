@@ -172,6 +172,7 @@ const store = createStore({
           password : userForm.password,
           newPassword: userForm.newPassword
         }).then((response) => {
+          console.log(response.data)
           commit('userInfos', response.data)
           commit('setStatus', ' ')
           resolve(response)

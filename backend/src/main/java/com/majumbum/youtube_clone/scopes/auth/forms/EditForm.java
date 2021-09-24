@@ -35,7 +35,7 @@ public class EditForm {
     public String newPassword;
 
     @NotBlank
-    public Gender gender;
+    public String gender;
 
     public String getNickname() {
         return nickname;
@@ -77,11 +77,11 @@ public class EditForm {
         this.newPassword = newPassword;
     }
 
-    public Gender getGender() {
+    public String getGender() {
         return gender;
     }
 
-    public void setGender(Gender gender) {
+    public void setGender(String gender) {
         this.gender = gender;
     }
 

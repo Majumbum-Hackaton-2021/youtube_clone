@@ -139,6 +139,8 @@ public class AuthController {
         if(editForm == null)
             ResponseEntity.badRequest().body(new MessageResponse("Editform is null"));
 
+        System.out.println(editForm);
+
         userService.editUser(editForm , userId.get());
         return ResponseEntity.ok(userService.findUserById(userId.get()));
     }
