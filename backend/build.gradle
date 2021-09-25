@@ -40,6 +40,9 @@ dependencies {
     // https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt
     implementation group: 'io.jsonwebtoken', name: 'jjwt', version: '0.9.1'
 
+    // Swagger
+    implementation 'io.springfox:springfox-boot-starter:3.0.0'
+
 
     //tests
     testImplementation 'org.springframework.boot:spring-boot-starter-test:2.5.4'
