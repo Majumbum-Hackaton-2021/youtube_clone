@@ -73,7 +73,11 @@ with "YoutubeCloneApplication.java" as main class (The api will start on port 80
 
 === API DOC 
 
-http://localhost:8090/swagger-ui/#/
+To see the API DOC : 
+
+. Go to backend/API-documentation
+
+. Open Swagger UI.html
 
 === App Sample
 
