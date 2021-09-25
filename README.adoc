@@ -75,9 +75,9 @@ with "YoutubeCloneApplication.java" as main class (The api will start on port 80
 
 To see the API DOC : 
 
-. Go to backend/API-documentation
+. Go to backend/API-documentation and  Open Swagger UI.html
 
-. Open Swagger UI.html
+. The Best Way ! Run the Spring Boot Application and goto http://localhost:8090/swagger-ui/
 
 === App Sample
 
