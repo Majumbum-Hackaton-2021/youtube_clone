@@ -57,7 +57,8 @@ To install and run this project follow these steps:
 
 . Go to (hackaton/frontend) and  run "npm run serve". The app will start on port 8080
 . Go to (hackaton/backend/src/main/java/com/majumbum/youtube_clone/) und start the Spring Boot Rest Api
-with "YoutubeCloneApplication.java" as main class (The api will start on port 8090)
+with "YoutubeCloneApplication.java" as main class (The api will start on port 8090) 
+. Or go on your command line :  ``cd backend`` and then ``./gradlew bootRun ``
 
 
 === Used Technologie
