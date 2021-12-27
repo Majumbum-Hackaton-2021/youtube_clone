@@ -162,7 +162,7 @@ public class VideoController {
         Optional<Video> video = videoService.deleteCommentById(commentId.get());
 
         if(video.isEmpty())
-            ResponseEntity.ok(new MessageResponse("Video dont exist"));
+            return ResponseEntity.ok(new MessageResponse("Video dont exist"));
 
         return ResponseEntity.ok(video.get());
     }
